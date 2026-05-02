@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Plaza Hotel</title>
+
+    <style>
+        body {
+            margin: 0;
+            background: white;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        .splash {
+            width: 600px;
+            height: 400px;
+            margin: 40px auto;
+            background: rgb(23, 35, 51);
+            position: relative;
+        }
+
+        h1 {
+            position: absolute;
+            top: 120px;
+            left: 50px;
+            width: 500px;
+            color: white;
+            text-align: center;
+            font-size: 22px;
+        }
+
+        .loading-text {
+            position: absolute;
+            top: 290px;
+            left: 50px;
+            color: white;
+            font-size: 14px;
+        }
+
+        .bar-bg {
+            position: absolute;
+            top: 310px;
+            left: 50px;
+            width: 500px;
+            height: 15px;
+            background: white;
+        }
+
+        .bar-fill {
+            width: 0%;
+            height: 100%;
+            background: rgb(46, 204, 113);
+        }
+
+        .percent {
+            position: absolute;
+            top: 330px;
+            left: 285px;
+            color: white;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="splash">
+    <h1>Welcome to Hotel Reservation System</h1>
+
+    <div class="loading-text">Loading modules...</div>
+
+    <div class="bar-bg">
+        <div class="bar-fill" id="bar"></div>
+    </div>
+
+    <div class="percent" id="percent">0%</div>
+</div>
+
+<script>
+    let i = 0;
+
+    let loading = setInterval(function () {
+        document.getElementById("percent").innerText = i + "%";
+        document.getElementById("bar").style.width = i + "%";
+
+        if (i >= 100) {
+            clearInterval(loading);
+            window.location.href = "/login";
+        }
+
+        i++;
+    }, 40);
+</script>
+
+</body>
+</html>

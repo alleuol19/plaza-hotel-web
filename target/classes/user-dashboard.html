@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Plaza Hotel - User Dashboard</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f4f4f4;
+        }
+
+        .top {
+            height: 125px;
+            background: rgb(23, 35, 51);
+            color: white;
+            position: relative;
+        }
+
+        .logo {
+            position: absolute;
+            left: 35px;
+            top: 40px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .user {
+            position: absolute;
+            right: 50px;
+            top: 35px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .user a {
+            color: white;
+        }
+
+        .main {
+            padding-top: 70px;
+        }
+
+        .home-title {
+            width: 320px;
+            height: 70px;
+            background: #8ec9f5;
+            border: 4px solid #1e293b;
+            box-shadow: 3px 3px 5px gray;
+            text-align: center;
+            line-height: 70px;
+            font-size: 34px;
+            font-weight: bold;
+            font-style: italic;
+            margin: -45px auto 50px auto;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 240px);
+            gap: 50px 35px;
+            justify-content: center;
+        }
+
+        .card {
+            height: 160px;
+            background: #8ec9f5;
+            box-shadow: 3px 3px 8px gray;
+            border: none;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .icon {
+            display: block;
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="top">
+    <div class="logo">PLAZA HOTEL</div>
+
+    <div class="user">
+        👤 <span th:text="${username}">User</span><br>
+        <a href="/login">Log Out</a>
+    </div>
+</div>
+
+<div class="main">
+    <div class="home-title">User Page</div>
+
+    <div class="grid">
+        <button class="card"><span class="icon">🏨</span>Book Room</button>
+        <button class="card"><span class="icon">📋</span>My Booking</button>
+        <button class="card"><span class="icon">💬</span>Feedback</button>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Check In</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f4f4f4;
+        }
+
+        .top {
+            height: 125px;
+            background: rgb(23, 35, 51);
+            color: white;
+            position: relative;
+        }
+
+        .logo {
+            position: absolute;
+            left: 40px;
+            top: 45px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .user {
+            position: absolute;
+            right: 50px;
+            top: 35px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .user a {
+            color: white;
+        }
+
+        .side {
+            position: absolute;
+            top: 125px;
+            left: 0;
+            width: 200px;
+            height: calc(100vh - 125px);
+            background: #8ec9f5;
+            border-right: 3px solid #1e293b;
+        }
+
+        .nav {
+            display: block;
+            width: 180px;
+            height: 60px;
+            margin: 20px auto;
+            background: #bde3ff;
+            border: none;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            line-height: 60px;
+            color: #1e293b;
+            text-decoration: none;
+        }
+
+        .active {
+            background: rgb(23, 35, 51);
+            color: white;
+        }
+
+        .back {
+            position: absolute;
+            bottom: 15px;
+            left: 10px;
+            font-size: 22px;
+            color: #1e293b;
+        }
+
+        .main {
+            margin-left: 200px;
+            padding: 50px 25px;
+            position: relative;
+        }
+
+        .title {
+            width: 300px;
+            height: 70px;
+            background: #8ec9f5;
+            border: 4px solid #1e293b;
+            box-shadow: 3px 3px 5px gray;
+            text-align: center;
+            line-height: 70px;
+            font-size: 36px;
+            font-weight: bold;
+            font-style: italic;
+            margin: -20px auto 20px auto;
+        }
+
+        .form-area {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        fieldset {
+            border: 4px solid #1e293b;
+            background: #fdfdfd;
+        }
+
+        legend {
+            border: 4px solid #1e293b;
+            background: #fdfdfd;
+            padding: 5px 30px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .personal {
+            width: 330px;
+            min-height: 410px;
+        }
+
+        .right {
+            width: 360px;
+        }
+
+        .payment {
+            height: 160px;
+            margin-bottom: 18px;
+        }
+
+        .room {
+            height: 220px;
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            margin: 17px 0;
+            font-size: 18px;
+        }
+
+        label {
+            width: 110px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="date"] {
+            width: 220px;
+            height: 28px;
+            padding-left: 6px;
+        }
+
+        .small-label {
+            width: 130px;
+        }
+
+        .radio-row {
+            margin: 15px 0;
+            font-size: 16px;
+        }
+
+        .room-id {
+            width: 110px !important;
+            border: none;
+            border-bottom: 2px solid gray;
+            background: transparent;
+        }
+
+        .search {
+            float: right;
+            background: #8ec9f5;
+            border: none;
+            padding: 10px 20px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+        }
+
+        .buttons {
+            text-align: right;
+            margin-top: 12px;
+            padding-right: 20px;
+        }
+
+        .clear {
+            width: 90px;
+            height: 45px;
+            background: gray;
+            color: white;
+            border: none;
+            font-weight: bold;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .submit {
+            width: 90px;
+            height: 45px;
+            background: green;
+            color: white;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="top">
+    <div class="logo">PLAZA HOTEL</div>
+    <div class="user">👤 Mohamed<br><a href="/login">Log Out</a></div>
+</div>
+
+<div class="side">
+    <a class="nav active" href="/checkin">Check in</a>
+    <a class="nav" href="#">Check Out</a>
+    <a class="nav" href="#">Room Booking</a>
+    <a class="nav" href="#">Cancel Booking</a>
+    <a class="nav" href="#">Rooms</a>
+    <a class="nav" href="#">Guests</a>
+    <a class="back" href="/admin-dashboard">‹ Back</a>
+</div>
+
+<div class="main">
+    <div class="title">Check In</div>
+
+    <form action="/checkin" method="post">
+        <div class="form-area">
+
+            <fieldset class="personal">
+                <legend>Personal Data</legend>
+
+                <div class="row">
+                    <label>Name</label>
+                    <input type="text" name="name" placeholder="First and Last Name">
+                </div>
+
+                <div class="row">
+                    <label>Phone</label>
+                    <input type="text" name="phone" placeholder="Phone Number">
+                </div>
+
+                <div class="row">
+                    <label>Email</label>
+                    <input type="email" name="email" placeholder="Email">
+                </div>
+
+                <div class="row">
+                    <label>Address</label>
+                    <input type="text" name="address" placeholder="Address">
+                </div>
+
+                <div class="row">
+                    <label>City</label>
+                    <input type="text" name="city" placeholder="New York">
+                </div>
+
+                <div class="row">
+                    <label>Nationality</label>
+                    <input type="text" name="nationality" placeholder="American">
+                </div>
+
+                <div class="row">
+                    <label>Passport No</label>
+                    <input type="text" name="passportNo" placeholder="12321-1231232123-4">
+                </div>
+            </fieldset>
+
+            <div class="right">
+                <fieldset class="payment">
+                    <legend>Payment</legend>
+
+                    <b>Credit Card Information :</b>
+
+                    <div class="row">
+                        <label>Card Number</label>
+                        <input type="text" name="cardNumber" placeholder="Card Number">
+                    </div>
+
+                    <div class="row">
+                        <label>CVC code</label>
+                        <input type="text" name="cvcCode" placeholder="CVC Code">
+                    </div>
+                </fieldset>
+
+                <fieldset class="room">
+                    <legend>Room Data</legend>
+
+                    <div class="radio-row">
+                        <span class="small-label">Room Type</span>
+                        <input type="radio" name="roomType" value="Economy"> Economy
+                        <input type="radio" name="roomType" value="Normal"> Normal
+                        <input type="radio" name="roomType" value="VIP"> VIP
+                    </div>
+
+                    <div class="radio-row">
+                        <span class="small-label">Room Capacity</span>
+                        <input type="radio" name="roomCapacity" value="Single"> Single
+                        <input type="radio" name="roomCapacity" value="Double"> Double
+                        <input type="radio" name="roomCapacity" value="Triple"> Triple
+                    </div>
+
+                    <div class="row">
+                        <label>Check in date</label>
+                        <input type="date" name="checkInDate">
+                    </div>
+
+                    <div class="row">
+                        <label>Check out date</label>
+                        <input type="date" name="checkOutDate">
+                    </div>
+
+                    <div class="row">
+                        <label>Room ID :</label>
+                        <input class="room-id" type="text" name="roomId">
+                        <button class="search" type="button">Search</button>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button class="clear" type="reset">Clear</button>
+            <button class="submit" type="submit">Submit</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
