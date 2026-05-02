@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Feedback</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f4f4f4;
+        }
+
+        .top {
+            height: 125px;
+            background: rgb(23, 35, 51);
+            color: white;
+            position: relative;
+        }
+
+        .logo {
+            position: absolute;
+            left: 40px;
+            top: 45px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .main {
+            padding: 40px;
+        }
+
+        .title {
+            width: 360px;
+            height: 70px;
+            background: #8ec9f5;
+            border: 4px solid #1e293b;
+            box-shadow: 3px 3px 5px gray;
+            text-align: center;
+            line-height: 70px;
+            font-size: 32px;
+            font-weight: bold;
+            font-style: italic;
+            margin: -35px auto 30px auto;
+        }
+
+        table {
+            width: 90%;
+            margin: auto;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 3px 3px 8px gray;
+        }
+
+        th {
+            background: #8ec9f5;
+            border: 2px solid #1e293b;
+            padding: 12px;
+            font-size: 17px;
+        }
+
+        td {
+            border: 2px solid #1e293b;
+            padding: 10px;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        tr.data-row:hover {
+            background: #dff1ff;
+            cursor: pointer;
+        }
+
+        tr.selected {
+            background: #bde3ff;
+            font-weight: bold;
+        }
+
+        .message {
+            text-align: left;
+            max-width: 400px;
+        }
+
+        .actions {
+            width: 90%;
+            margin: 25px auto;
+            text-align: right;
+        }
+
+        .delete-btn {
+            background: red;
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            background: darkred;
+        }
+
+        .back {
+            display: block;
+            width: 160px;
+            margin: 30px auto;
+            text-align: center;
+            color: #1e293b;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="top">
+    <div class="logo">PLAZA HOTEL</div>
+</div>
+
+<div class="main">
+    <div class="title">User Feedback</div>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Rating</th>
+            <th>Message</th>
+        </tr>
+
+        <tr class="data-row"
+            th:each="f : ${feedbacks}"
+            th:attr="data-id=${f.id}"
+            onclick="selectFeedback(this)">
+            <td th:text="${f.id}"></td>
+            <td th:text="${f.username}"></td>
+            <td th:text="${f.name}"></td>
+            <td th:text="${f.rating}"></td>
+            <td class="message" th:text="${f.message}"></td>
+        </tr>
+    </table>
+
+    <div class="actions">
+        <form action="/delete-feedback" method="get" onsubmit="return checkSelected();">
+            <input type="hidden" id="selectedId" name="id">
+            <button class="delete-btn" type="submit">Delete Selected</button>
+        </form>
+    </div>
+
+    <a class="back" href="/admin-dashboard">‹ Back</a>
+</div>
+
+<script>
+    function selectFeedback(row) {
+        document.querySelectorAll(".data-row").forEach(r => r.classList.remove("selected"));
+        row.classList.add("selected");
+
+        document.getElementById("selectedId").value = row.getAttribute("data-id");
+    }
+
+    function checkSelected() {
+        let id = document.getElementById("selectedId").value;
+
+        if (!id) {
+            alert("Please select a feedback first.");
+            return false;
+        }
+
+        return confirm("Delete selected feedback?");
+    }
+</script>
+
+</body>
+</html>

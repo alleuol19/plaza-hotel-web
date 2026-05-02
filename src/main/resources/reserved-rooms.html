@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reserved Rooms</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f4f4f4;
+        }
+
+        .top {
+            height: 125px;
+            background: rgb(23, 35, 51);
+            color: white;
+            position: relative;
+        }
+
+        .logo {
+            position: absolute;
+            left: 40px;
+            top: 45px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .main {
+            padding: 40px;
+        }
+
+        .title {
+            width: 360px;
+            height: 70px;
+            background: #8ec9f5;
+            border: 4px solid #1e293b;
+            box-shadow: 3px 3px 5px gray;
+            text-align: center;
+            line-height: 70px;
+            font-size: 32px;
+            font-weight: bold;
+            font-style: italic;
+            margin: -35px auto 30px auto;
+        }
+
+        table {
+            width: 95%;
+            margin: auto;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 3px 3px 8px gray;
+        }
+
+        th {
+            background: #8ec9f5;
+            border: 2px solid #1e293b;
+            padding: 12px;
+            font-size: 17px;
+        }
+
+        td {
+            border: 2px solid #1e293b;
+            padding: 10px;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        .back {
+            display: block;
+            width: 160px;
+            margin: 30px auto;
+            text-align: center;
+            color: #1e293b;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="top">
+    <div class="logo">PLAZA HOTEL</div>
+</div>
+
+<div class="main">
+    <div class="title">Reserved Rooms</div>
+
+    <table>
+        <tr>
+            <th>Booked By</th>
+            <th>Guest Name</th>
+            <th>Room ID</th>
+            <th>Room Type</th>
+            <th>Capacity</th>
+            <th>Check In</th>
+            <th>Check Out</th>
+        </tr>
+
+        <tr th:each="r : ${reserved}">
+            <td th:text="${r.username}"></td>
+            <td th:text="${r.name}"></td>
+            <td th:text="${r.roomId}"></td>
+            <td th:text="${r.roomType}"></td>
+            <td th:text="${r.roomCapacity}"></td>
+            <td th:text="${r.checkInDate}"></td>
+            <td th:text="${r.checkOutDate}"></td>
+        </tr>
+    </table>
+
+    <a class="back" href="/admin-dashboard">‹ Back</a>
+</div>
+
+</body>
+</html>

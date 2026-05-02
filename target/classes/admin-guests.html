@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Guests</title>
+</head>
+<body>
+
+<h2>Guests Who Booked</h2>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Guest Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Action</th>
+    </tr>
+
+    <tr th:each="g : ${guests}">
+        <form action="/edit-guest" method="post">
+            <td>
+                <span th:text="${g.id}"></span>
+                <input type="hidden" name="id" th:value="${g.id}">
+            </td>
+
+            <td th:text="${g.username}"></td>
+
+            <td>
+                <input type="text" name="name" th:value="${g.name}">
+            </td>
+
+            <td>
+                <input type="text" name="phone" th:value="${g.phone}">
+            </td>
+
+            <td>
+                <input type="email" name="email" th:value="${g.email}">
+            </td>
+
+            <td>
+                <button type="submit">Edit</button>
+                <a th:href="@{/delete-guest(id=${g.id})}">
+                    <button type="button" onclick="return confirm('Delete this guest booking?')">
+                        Delete
+                    </button>
+                </a>
+            </td>
+        </form>
+    </tr>
+</table>
+
+<br>
+<a href="/admin-dashboard">‹ Back</a>
+
+</body>
+</html>

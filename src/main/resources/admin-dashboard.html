@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Hotel Reservation System</title>
+    <title>Admin Dashboard</title>
 
     <style>
         body {
@@ -20,7 +20,7 @@
         .logo {
             position: absolute;
             left: 35px;
-            top: 35px;
+            top: 40px;
             font-size: 28px;
             font-weight: bold;
         }
@@ -29,7 +29,7 @@
             position: absolute;
             right: 40px;
             top: 45px;
-            font-size: 26px;
+            font-size: 24px;
             font-weight: bold;
         }
 
@@ -41,14 +41,6 @@
             height: calc(100vh - 125px);
             background: #8ec9f5;
             border-right: 2px solid #1e293b;
-        }
-
-        .profile {
-            margin: 25px 12px;
-            padding: 15px;
-            border: 2px solid #1e293b;
-            background: #bde3ff;
-            font-size: 13px;
         }
 
         .circle-box {
@@ -68,6 +60,7 @@
         }
 
         .logout {
+            display: block;
             margin-left: 35px;
             margin-top: 25px;
             font-size: 18px;
@@ -85,40 +78,51 @@
             position: absolute;
             top: -45px;
             left: 190px;
-            width: 300px;
+            width: 330px;
             height: 70px;
             background: #8ec9f5;
             border: 4px solid #1e293b;
             box-shadow: 3px 3px 5px gray;
             text-align: center;
             line-height: 70px;
-            font-size: 36px;
+            font-size: 34px;
             font-weight: bold;
             font-style: italic;
         }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(3, 240px);
-            gap: 70px 35px;
-            justify-content: center;
-            margin-top: 20px;
-        }
+        
 
-        .card {
-            height: 160px;
-            background: #8ec9f5;
-            box-shadow: 3px 3px 8px gray;
-            border: none;
-            font-size: 30px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+        .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 240px);
+    gap: 60px 60px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.grid a {
+    width: 240px;
+}
+
+.card {
+    width: 240px;
+    height: 160px;
+    background: #8ec9f5;
+    box-shadow: 3px 3px 8px gray;
+    border: none;
+    font-size: 27px;
+    font-weight: bold;
+    cursor: pointer;
+}
 
         .icon {
             display: block;
             font-size: 50px;
             margin-bottom: 15px;
+        }
+
+        a {
+            text-decoration: none;
         }
     </style>
 </head>
@@ -131,10 +135,6 @@
 </div>
 
 <div class="side">
-    <div class="profile">
-
-    </div>
-
     <div class="circle-box">
         <div class="circle"></div>
         <p>99%</p>
@@ -144,22 +144,80 @@
     <div class="circle-box">
         <div class="circle" style="background:white;"></div>
         <p>1%</p>
-        <button>Reserved Rooms</button>
+        <a href="/reserved-rooms">
+    <button th:text="${reservedRooms + ' Reserved Rooms'}">Reserved Rooms</button>
+</a>
     </div>
 
     <a class="logout" href="/login">🔴 Log Out</a>
 </div>
 
 <div class="main">
-    <div class="home-title">Home Page</div>
+    <div class="home-title">Admin Page</div>
 
     <div class="grid">
-        <button class="card"><span class="icon">🏨</span>Check In</button>
-        <button class="card"><span class="icon">📋</span>Room Booking</button>
-        <button class="card"><span class="icon">🛏️</span>Rooms</button>
-        <button class="card"><span class="icon">🏨</span>Check Out</button>
-        <button class="card"><span class="icon">❌</span>Cancel Booking</button>
-        <button class="card"><span class="icon">👥</span>Guests</button>
+        <a href="/admin-bookings">
+            <button class="card"><span class="icon">📋</span>All Bookings</button>
+        </a>
+
+        <a href="/admin-rooms">
+            <button class="card"><span class="icon">🛏️</span>Rooms</button>
+        </a>
+
+        <a href="/admin-guests">
+            <button class="card"><span class="icon">👥</span>Guests</button>
+        </a>
+
+        <a href="/admin-feedback">
+            <button class="card"><span class="icon">💬</span>User Feedback</button>
+        </a>
+        @GetMapping("/admin-dashboard")
+public String adminDashboard(HttpSession session, Model model) {
+
+    int totalRooms = 0;
+    int availableRooms = 0;
+    int reservedRooms = 0;
+
+    try (Connection conn = DriverManager.getConnection(url, dbUser, dbPass)) {
+
+        String totalSql = "SELECT COUNT(*) FROM Rooms";
+        PreparedStatement totalPst = conn.prepareStatement(totalSql);
+        ResultSet totalRs = totalPst.executeQuery();
+
+        if (totalRs.next()) {
+            totalRooms = totalRs.getInt(1);
+        }
+
+        String availableSql = "SELECT COUNT(*) FROM Rooms WHERE isAvailable = true";
+        PreparedStatement availablePst = conn.prepareStatement(availableSql);
+        ResultSet availableRs = availablePst.executeQuery();
+
+        if (availableRs.next()) {
+            availableRooms = availableRs.getInt(1);
+        }
+
+        reservedRooms = totalRooms - availableRooms;
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    int availablePercent = 0;
+    int reservedPercent = 0;
+
+    if (totalRooms > 0) {
+        availablePercent = (availableRooms * 100) / totalRooms;
+        reservedPercent = (reservedRooms * 100) / totalRooms;
+    }
+
+    model.addAttribute("username", session.getAttribute("username"));
+    model.addAttribute("availablePercent", availablePercent);
+    model.addAttribute("reservedPercent", reservedPercent);
+    model.addAttribute("availableRooms", availableRooms);
+    model.addAttribute("reservedRooms", reservedRooms);
+
+    return "admin-dashboard";
+}
     </div>
 </div>
 

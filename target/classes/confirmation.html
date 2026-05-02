@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirmation Data</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f4f4f4;
+        }
+
+        .top {
+            height: 125px;
+            background: rgb(23, 35, 51);
+            color: white;
+            position: relative;
+        }
+
+        .logo {
+            position: absolute;
+            left: 40px;
+            top: 45px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .title {
+            width: 330px;
+            height: 70px;
+            background: #8ec9f5;
+            border: 4px solid #1e293b;
+            box-shadow: 3px 3px 5px gray;
+            text-align: center;
+            line-height: 70px;
+            font-size: 34px;
+            font-weight: bold;
+            font-style: italic;
+            margin: -35px auto 30px auto;
+        }
+
+        .main {
+            padding: 20px;
+        }
+
+        .content {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        fieldset {
+            border: 4px solid #1e293b;
+            background: white;
+            width: 380px;
+        }
+
+        legend {
+            border: 4px solid #1e293b;
+            background: white;
+            padding: 5px 30px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .row {
+            display: flex;
+            margin: 15px;
+            font-size: 18px;
+        }
+
+        .label {
+            width: 160px;
+            font-weight: bold;
+        }
+
+        .value {
+            flex: 1;
+            background: #f1f1f1;
+            padding: 6px;
+        }
+
+        .buttons {
+            text-align: right;
+            margin: 20px 80px;
+        }
+
+        .cancel {
+            width: 100px;
+            height: 45px;
+            background: gray;
+            color: white;
+            border: none;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .save {
+            width: 100px;
+            height: 45px;
+            background: green;
+            color: white;
+            border: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="top">
+    <div class="logo">PLAZA HOTEL</div>
+</div>
+
+<div class="main">
+    <div class="title">Confirmation</div>
+
+    <div class="content">
+
+        <fieldset>
+            <legend>Personal Data</legend>
+
+            <div class="row"><div class="label">Name</div><div class="value" th:text="${name}"></div></div>
+            <div class="row"><div class="label">Phone</div><div class="value" th:text="${phone}"></div></div>
+            <div class="row"><div class="label">Email</div><div class="value" th:text="${email}"></div></div>
+            <div class="row"><div class="label">Address</div><div class="value" th:text="${address}"></div></div>
+            <div class="row"><div class="label">City</div><div class="value" th:text="${city}"></div></div>
+            <div class="row"><div class="label">Nationality</div><div class="value" th:text="${nationality}"></div></div>
+            <div class="row"><div class="label">Passport No</div><div class="value" th:text="${passportNo}"></div></div>
+
+            <br>
+            <b>Credit Card Information:</b>
+
+            <div class="row"><div class="label">Card Number</div><div class="value" th:text="${cardNumber}"></div></div>
+            <div class="row"><div class="label">CVC code</div><div class="value" th:text="${cvcCode}"></div></div>
+        </fieldset>
+
+        <div>
+            <fieldset>
+                <legend>Room Data</legend>
+
+                <div class="row"><div class="label">Room Type:</div><div th:text="${roomType}"></div></div>
+                <div class="row"><div class="label">Room Capacity:</div><div th:text="${roomCapacity}"></div></div>
+                <div class="row"><div class="label">Check in date:</div><div th:text="${checkInDate}"></div></div>
+                <div class="row"><div class="label">Check out date:</div><div th:text="${checkOutDate}"></div></div>
+                <div class="row"><div class="label">Room ID:</div><div th:text="${roomId}"></div></div>
+            </fieldset>
+
+            <br>
+
+            <fieldset>
+                <div class="row"><div class="label">Number of Nights:</div><div th:text="${nights}"></div></div>
+                <div class="row"><div class="label">Night Cost:</div><div th:text="${nightCost}"></div></div>
+                <div class="row"><div class="label">Total Price:</div><div th:text="${totalPrice}"></div></div>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="buttons">
+        <a href="/book-room"><button class="cancel">Cancel</button></a>
+
+        <form action="/save-booking" method="post" style="display:inline;">
+            <button class="save" type="submit">Save</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
