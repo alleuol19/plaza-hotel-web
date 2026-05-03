@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Plaza Hotel - Login</title>
 
@@ -7,13 +7,13 @@
         body {
             margin: 0;
             background: white;
-            font-family: "Segoe UI";
+            font-family: "Segoe UI", Arial, sans-serif;
         }
 
         .window {
             width: 400px;
             height: 450px;
-            margin: 20px auto;
+            margin: 40px auto;
             background: rgb(23, 35, 51);
             position: relative;
         }
@@ -21,7 +21,9 @@
         .title {
             position: absolute;
             top: 40px;
-            left: 90px;
+            left: 0;
+            width: 100%;
+            text-align: center;
             color: white;
             font-size: 26px;
             font-weight: bold;
@@ -31,7 +33,7 @@
             position: absolute;
             left: 90px;
             color: white;
-            font-size: 12px;
+            font-size: 13px;
         }
 
         .user-label { top: 120px; }
@@ -42,6 +44,8 @@
             left: 90px;
             width: 220px;
             height: 30px;
+            padding-left: 8px;
+            box-sizing: border-box;
         }
 
         .user-input { top: 140px; }
@@ -54,6 +58,7 @@
             width: 220px;
             height: 40px;
             cursor: pointer;
+            font-weight: bold;
         }
 
         .signup {
@@ -63,7 +68,7 @@
             width: 260px;
             text-align: center;
             color: white;
-            font-size: 12px;
+            font-size: 13px;
             text-decoration: none;
         }
 
@@ -73,11 +78,11 @@
 
         .error {
             position: absolute;
-            top: 370px;
+            top: 375px;
             width: 100%;
             text-align: center;
             color: red;
-            font-size: 12px;
+            font-size: 13px;
         }
     </style>
 </head>
@@ -88,21 +93,21 @@
 
     <div class="title">PLAZA HOTEL</div>
 
-    <form action="/login" method="post">
+    <form th:action="@{/login}" method="post">
         <label class="user-label">Username:</label>
-        <input class="user-input" type="text" name="username">
+        <input class="user-input" type="text" name="username" required>
 
         <label class="pass-label">Password:</label>
-        <input class="pass-input" type="password" name="password">
+        <input class="pass-input" type="password" name="password" required>
 
         <button type="submit">LOGIN</button>
     </form>
 
-    <a class="signup" href="/signup">
+    <a class="signup" th:href="@{/signup}">
         Don't have an account? <span>Sign Up</span>
     </a>
 
-    <p class="error" th:text="${error}"></p>
+    <p class="error" th:if="${error}" th:text="${error}"></p>
 
 </div>
 
