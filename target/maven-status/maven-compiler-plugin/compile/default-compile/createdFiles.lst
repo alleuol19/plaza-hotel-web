@@ -1,3 +1,2 @@
-AuthController.class
-DBConnectionTest.class
-TableDataPrinter.class
+com\example\hotel\AuthController.class
+com\example\hotel\HotelReservationAppApplication.class
