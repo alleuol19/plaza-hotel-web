@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     static String url = "jdbc:mysql://switchyard.proxy.rlwy.net:27217/railway";
-    static String dbUser = System.getenv("root");
-    static String dbPass = System.getenv("HUMUeVXnKdlhsHllvEQqxWZKErmocAhV");
+    static String dbUser = "root";
+    static String dbPass = "HUPUWXrK1dhs11vEQqdxzKEmocaAVW";
 
     @GetMapping("/")
     public String splash() {
