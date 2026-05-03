@@ -6,8 +6,6 @@ import java.sql.SQLException;
 
 public class DBConnectionTest {
 
-    // These MUST be static so the static testConnection method can use them
-    // Get these from the "Variables" tab in Screenshot 2026-05-02 161858.png
 	static String host = "switchyard.proxy.rlwy.net";     
     static String port = "27217";     
     static String dbName = "railway"; 
@@ -16,10 +14,7 @@ public class DBConnectionTest {
 
     // The full URL for your live cloud database
     static String url = "jdbc:mysql://" + host + ":" + port + "/" + dbName;
-
-    public static void main(String[] args) {
-        testConnection();
-    }
+ 
 
     public static void testConnection() {
         System.out.println("Attempting to connect to Railway Cloud...");

@@ -17,12 +17,10 @@ public class TableDataPrinter {
     // The live cloud URL
     static String url = "jdbc:mysql://" + host + ":" + port + "/" + dbName;
 
-    public static void main(String[] args) {
-        // This must match a table name you imported into Railway
+   
         String tableName = "Users"; 
 
-        printTableData(tableName);
-    }
+
 
     public static void printTableData(String tableName) {
         String query = "SELECT * FROM " + tableName;
